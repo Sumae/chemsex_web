@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro e Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="cadastro" class="form-container">
+    <h2>Cadastro</h2>
+    <label for="nome">Nome do Usuário:</label>
+    <input type="text" id="nome">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email">
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha">
+
+    <label for="confirmaSenha">Confirme a Senha:</label>
+    <input type="password" id="confirmaSenha">
+
+    <button onclick="cadastrar()">Cadastrar</button>
+</div>
+
+<div id="login" class="form-container" style="display:none;">
+    <h2>Login</h2>
+    <label for="loginNome">Nome do Usuário:</label>
+    <input type="text" id="loginNome">
+
+    <label for="loginSenha">Senha:</label>
+    <input type="password" id="loginSenha">
+
+    <button onclick="fazerLogin()">Entrar</button>
+</div>
+
+<script>
+    let usuarioCadastrado = {};
+
+    function cadastrar() {
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const confirmaSenha = document.getElementById('confirmaSenha').value;
+
+        if (!nome || !email || !senha || !confirmaSenha) {
+            alert('Preencha todos os campos.');
+            return;
+        }
+
+        if (senha !== confirmaSenha) {
+            alert('As senhas não coincidem.');
+            return;
+        }
+
+        // Simula salvar os dados
+        usuarioCadastrado = {
+            nome: nome,
+            email: email,
+            senha: senha
+        };
+
+        alert('Cadastro realizado com sucesso! Redirecionando para o login...');
+        document.getElementById('cadastro').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+    }
+
+    function fazerLogin() {
+        const loginNome = document.getElementById('loginNome').value;
+        const loginSenha = document.getElementById('loginSenha').value;
+
+        if (loginNome === usuarioCadastrado.nome && loginSenha === usuarioCadastrado.senha) {
+            alert('Login bem-sucedido! Bem-vindo, ' + usuarioCadastrado.nome + '!');
+        } else {
+            alert('Nome de usuário ou senha incorretos.');
+        }
+    }
+</script>
+
+</body>
+</html>
